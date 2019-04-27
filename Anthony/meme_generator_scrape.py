@@ -7,11 +7,18 @@ from bs4 import BeautifulSoup
 import requests
 import shutil
 import os.path
+import os
 
-save_path = 'memes'
+imgs_path = 'memes'
 n_captions = 14   #this number *15 is the total number of captions per template
 n_templates = 181  #this number *15 is the total number of templates
 Uerrors = 0
+header_flag = True
+
+if os.path.exists("captions.csv"):
+    os.remove("captions.csv")
+if not os.path.exists(imgs_path):   
+    os.mkdir(imgs_path)
 
 for i in range(1,n_templates):
     if i == 1:
@@ -29,7 +36,7 @@ for i in range(1,n_templates):
         img_url = img['src']
         response = requests.get(img_url, stream=True)
         name_of_file = img_url.split('/')[-1]
-        completeName = os.path.join(save_path, name_of_file)
+        completeName = os.path.join(imgs_path, name_of_file)
         with open(completeName,'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
         del response
@@ -44,10 +51,15 @@ for i in range(1,n_templates):
             SOUP = BeautifulSoup(R.text,'html.parser')
             CHARS = SOUP.find_all(class_='char-img')
             IMGS = [char.find('img') for char in CHARS]
-            with open('Captions.txt', 'a') as f:
-                for IMG in IMGS:
+            CAPS = [(char.find(class_='optimized-instance-text0').text, char.find(class_='optimized-instance-text1').text) for char in CHARS]
+            with open('captions.csv', 'a') as f:
+                for CAP in CAPS:
                     try:
-                        f.write('%s\n' % (IMG['alt']))
+                        if header_flag:
+                            f.write("image,above_text,below_text")
+                            header_flag = False
+                        else:
+                            f.write("\n" + img['alt'] + "," + CAP[0].replace(',', '') + "," + CAP[1].replace(',', ''))
                     except UnicodeEncodeError:
                         Uerrors += 1
                         pass
@@ -69,7 +81,7 @@ print(IMGS[1]['alt'])
 img_url = imgs[0]['src']
 response = requests.get(img_url, stream=True)
 name_of_file = img_url.split('/')[-1]
-completeName = os.path.join(save_path, name_of_file)
+completeName = os.path.join(imgs_path, name_of_file)
 with open(completeName,'wb') as out_file:
     shutil.copyfileobj(response.raw, out_file)
 del response
