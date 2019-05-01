@@ -29,8 +29,8 @@ class MyDataGenerator(keras.utils.Sequence):
             # store image
             X_img[i] = img
 
-            # need to figure out what this would look like 
-            X_word[i] = mapping[f] # {}: filepath -> word vector
+            # need to figure out what this would look like
+            X_word[i] = mapping[f] # {}: filepath -> word vector # maybe we need to process this beforehand so we have some dict that already averages shit for each title
         return [X_img, X_word], Y
 
     def __len__(self):
