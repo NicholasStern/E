@@ -136,3 +136,6 @@ About
 
 # Mac stuff
 *.DS_Store
+
+# Data files
+anthony/glove.txt
