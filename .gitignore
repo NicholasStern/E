@@ -139,3 +139,4 @@ About
 
 # Data files
 anthony/glove.txt
+anthony/glove_objs.pkl
