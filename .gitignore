@@ -140,3 +140,6 @@ About
 # Data files
 anthony/glove.txt
 anthony/glove_objs.pkl
+
+# Other python
+__pycache__/
