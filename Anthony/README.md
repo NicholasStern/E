@@ -14,6 +14,8 @@
 - a is a dictionary w/ keys=words and values=row index in b
 - b is a matrix where each row corresponds to a GloVe vector for a word in the entire GloVe vocabulary (roughly 1.9 million)
 
+**processed_data.pkl** - Pickle file with (embedding, idx2word, word2idx, glove_idx2idx, captions).
+
 **memes** - Folder with all of scraped base images from Meme Generator.
 
 **captions.csv** - Raw dataset from Meme Generator scrape with labels and captions from.
