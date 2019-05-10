@@ -141,6 +141,7 @@ About
 anthony/glove.txt
 anthony/glove_objs.pkl
 anthony/processed_data.pkl
+anthony/small_processed_data.pkl
 
 # Other python
 __pycache__/
