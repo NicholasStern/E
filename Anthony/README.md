@@ -8,15 +8,23 @@
 
 `pickle_utils.py` - A class and functions to handle serializing large files. Lifted from this [Stack Overflow response](https://stackoverflow.com/questions/31468117/python-3-can-pickle-handle-byte-objects-larger-than-4gb).
 
+`loadGlove.py` - Function to read in GloVe embeddings .txt file and create mapping dictionary for words and embeddings.
+
 ### Data
 
 **glove_objs.pkl** - Pickle file with [a, b] where 
-- a is a dictionary w/ keys=words and values=row index in b
-- b is a matrix where each row corresponds to a GloVe vector for a word in the entire GloVe vocabulary (roughly 1.9 million)
+- `a` is a dictionary w/ keys=words and values=row index in b
+- `b` is a matrix where each row corresponds to a GloVe vector for a word in the entire GloVe vocabulary (roughly 1.9 million)
 
-**processed_data.pkl** - Pickle file with (embedding, idx2word, word2idx, glove_idx2idx, captions).
+**full_clean_processed_data.pkl** - Pickle file with (embedding, idx2word, word2idx, captions) where
+- `embedding` is a matrix where each row corresponds to the GloVe embedding for a word, with the words indexed by the `word2idx` dictionary
+- `idx2word` and `word2idx` are mapping dictionaries
+- `captions` is a .csv with padded and tokenized captions and image labels as well as file paths for base images
+- **There are smaller, preliminary versions of this file that are in our .gitignore.**
 
 **memes** - Folder with all of scraped base images from Meme Generator.
 
 **captions.csv** - Raw dataset from Meme Generator scrape with labels and captions from.
+
+**google_twunter_lol.txt** - Offensive words from Google's "What Do You Love" project.
 
